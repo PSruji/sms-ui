@@ -10,6 +10,18 @@ export interface Student {
     grade: number;
 }
 
+export interface StudentRequest {
+    id: number;
+    fname: string;
+    mname: string;
+    lname: string;
+    email: string;
+    phone: string;
+    dojStr: string;
+    dobStr: string;
+    grade: number;
+}
+
 export interface StudentTable {
     content: Student[];
     pageNo: number;

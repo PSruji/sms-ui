@@ -1,5 +1,76 @@
-<section fxLayout="column" fxFlexAlign="stretch"> 
-    <div fxFlexAlign="center"> 
-        <p>Create Student</p> 
+<section fxLayout="column" fxFlexAlign="stretch">
+    <div fxFlexAlign="center">
+        <p>Create Student</p>
     </div>
-</section>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div fxLayout="row" fxLayoutGap="15px">
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="fname" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error>First name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Middle Name</mat-label>
+                <input matInput placeholder="Middle Name" formControlName="mname">
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" formControlName="lname" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error>Last name is required</mat-error>
+            </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxLayoutGap="15px">
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error>Valid Email is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Phone</mat-label>
+                <input matInput placeholder="Phone Number" formControlName="phone">
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="15px">
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="dobStr" placeholder="Date of Birth" formControlName="dobStr" required>
+                <mat-datepicker-toggle matSuffix [for]="dobStr"></mat-datepicker-toggle>
+                <mat-datepicker #dobStr></mat-datepicker>
+                <mat-error>Date Of Birth is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Date of Joining</mat-label>
+                <input matInput [matDatepicker]="dojStr" placeholder="Date of Joining" formControlName="dojStr" required>
+                <mat-datepicker-toggle matSuffix [for]="dojStr"></mat-datepicker-toggle>
+                <mat-datepicker #dojStr></mat-datepicker>
+                <mat-error>Date Of Joining is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Grade</mat-label>
+                <mat-select formControlName="grade" required>
+                    <mat-option value="1">1st Grade</mat-option>
+                    <mat-option value="2">2nd Grade</mat-option>
+                    <mat-option value="3">3rd Grade</mat-option>
+                    <mat-option value="4">4th Grade</mat-option>
+                </mat-select>
+                <mat-error>Grade is required</mat-error>
+            </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+            <button mat-raised-button color="primary" [disabled]="!form.valid" >Submit</button>
+            <button mat-raised-button color="warn">Cancel</button>
+        </div>
+        
+    </form>
+</section>    

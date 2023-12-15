@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StudentTable } from '../model/student.model';
+import { Student, StudentRequest, StudentTable } from '../model/student.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,4 +21,9 @@ export class StudentService {
     return this.http.get<StudentTable>(url);
   }
 
+  public create(std: StudentRequest): Observable<Student>{
+    const url='http://localhost:8080/students'
+  
+    return this.http.post<Student>(url,std)
+  }
 }

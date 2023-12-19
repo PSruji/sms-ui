@@ -1,0 +1,8 @@
+<section fxLayout="column" fxFlexAlign="stretch">
+    <div fxFlexAlign="center">
+        <p>Student Details</p>
+    </div>
+    <div *ngIf="std">
+        {{std.id}},{{std.fname}},{{std.lname}}
+    </div>
+</section> 

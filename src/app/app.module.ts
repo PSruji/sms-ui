@@ -14,6 +14,7 @@ import { CreateComponent } from './create/create.component';
 import { AboutComponent } from './about/about.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ViewComponent } from './view/view.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SidenavComponent,
     HomeComponent,
     CreateComponent,
-    AboutComponent
+    AboutComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
         fname:  ['',Validators.required],
         mname:  [''],
         lname:  ['',Validators.required],
-        email:  ['',Validators.required, Validators.email],
+        email:  ['',[Validators.required, Validators.email]],
         phone:  [''],
         dojStr: ['',Validators.required],
         dobStr: ['',Validators.required],

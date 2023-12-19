@@ -4,9 +4,33 @@
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <!--   <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
           <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
           <td mat-cell *matCellDef="let emp">{{ emp[column] }}</td>
+        </ng-container> -->
+        <ng-container matColumnDef="id" >
+          <th mat-header-cell *matHeaderCellDef>Student ID</th>
+          <td mat-cell *matCellDef="let emp" width="15%">{{ emp.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="fname" >
+          <th mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let emp"  width="30%">{{ emp.fname }}</td>
+        </ng-container>
+        <ng-container matColumnDef="lname" >
+          <th mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let emp"  width="30%">{{ emp.lname }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let emp" width="25%">
+            <table width="100%">
+              <tr>
+                <td><mat-icon color="primary" style="cursor: pointer;" matTooltip="View Student Details" (click)="view(emp.id)">remove_red_eye</mat-icon></td>
+                <td><mat-icon color="primary" style="cursor: pointer;" matTooltip="Update Student Details" (click)="edit(emp.id)">edit</mat-icon></td>
+                <td><mat-icon color="warn" style="cursor: pointer;" matTooltip="Delete Student" (click)="delete(emp.id)">delete</mat-icon></td>
+              </tr>
+            </table>
+          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>

@@ -3,6 +3,7 @@ import { Student, StudentTable } from '../model/student.model';
 import { StudentService } from '../service/student.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'fname',
-    'lname'
+    'lname',
+    'actions'
   ];
 
   stuTable!: StudentTable;
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
 
 
   
-  constructor(public studentService: StudentService) { }
+  constructor(public studentService: StudentService,private route: ActivatedRoute,private router : Router) { }
 ngOnInit(): void {
     this.loadData();
   }
@@ -77,4 +79,18 @@ pageChanged(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.loadData();
   }
+
+  view(id: any){
+    console.log(`view details called for student id: ${id}`);
+    this.router.navigate([`/view/${id}`]);
+  }
+
+  edit(id: any){
+    console.log(`Edit details called for student id: ${id}`);
+  }
+
+  delete(id: any){
+    console.log(`Delete details called for student id: ${id}`);
+  }
+
 }

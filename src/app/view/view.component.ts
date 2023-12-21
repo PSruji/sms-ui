@@ -22,6 +22,24 @@ export class ViewComponent implements OnInit {
   
   constructor(public studentService: StudentService, private route: ActivatedRoute, private router : Router) { }
 
+  home(){
+    this.router.navigate(['/home']);
+  }
+
+  edit(){
+    this.router.navigate([`/edit/${this.id}`]);
+  }
+formatGrade(grade:number){
+  if(grade==1){
+    return "1st Grade";
+  }else if(grade == 2){
+    return "2nd Grade";
+  }else if(grade==3){
+    return "3rd Grade";
+  }else{
+    return `${grade}th Grade`;
+  }
+}
 
 
 }

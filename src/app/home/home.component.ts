@@ -87,6 +87,8 @@ pageChanged(event: PageEvent) {
 
   edit(id: any){
     console.log(`Edit details called for student id: ${id}`);
+    this.router.navigate([`/edit/${id}`]);
+
   }
 
   delete(id: any){

@@ -1,6 +1,6 @@
 <section fxLayout="column" fxFlexAlign="stretch">
     <div fxFlexAlign="center">
-        <p>Create Student</p>
+        <p>{{title}} Student</p>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div fxLayout="row" fxLayoutGap="15px">
@@ -62,14 +62,15 @@
                     <mat-option value="2">2nd Grade</mat-option>
                     <mat-option value="3">3rd Grade</mat-option>
                     <mat-option value="4">4th Grade</mat-option>
+                    <mat-option value="4">5th Grade</mat-option>
                 </mat-select>
                 <mat-error>Grade is required</mat-error>
             </mat-form-field>
 
         </div>
         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
-            <button mat-raised-button color="primary" [disabled]="!form.valid" >Submit</button>
-            <button mat-raised-button color="warn">Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="!form.valid" >{{title}}</button>
+            <button mat-raised-button color="warn" (click)="home()">Cancel</button>
         </div>
         
     </form>

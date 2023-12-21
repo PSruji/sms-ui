@@ -2,7 +2,54 @@
     <div fxFlexAlign="center">
         <p>Student Details</p>
     </div>
-    <div *ngIf="std">
-        {{std.id}},{{std.fname}},{{std.lname}}
+    <div *ngIf="std" fxLayout = "row" fxLayoutAlign="center center">
+        <table style="border: 1px solid gray; width:50%; border-collapse: collapse;">
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Id</td>
+                <td>{{std.id}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">First Name</td>
+                <td>{{std.fname}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Last Name</td>
+                <td>{{std.lname}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Middle Name</td>
+                <td>{{std.mname}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Last Name</td>
+                <td>{{std.lname}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Email</td>
+                <td>{{std.email}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Phone</td>
+                <td>{{std.phone}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Date of Birth</td>
+                <td>{{std.dob}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Date of Join</td>
+                <td>{{std.doj}}</td>
+            </tr>
+            <tr style="border:1px solid gray;">
+                <td style="border-right:1px solid gray;font-weight: bold;">Grade</td>
+                <td>{{formatGrade(std.grade)}}</td>
+            </tr>
+        </table>
+        
+    </div>
+    <br/>
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" (click)="home()">Home</button>
+        <button mat-raised-button color="primary" (click)="edit()">Edit</button>
     </div>
 </section> 

@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'create', component: CreateComponent},
   { path: 'about', component: AboutComponent},
     { path: 'view/:id', component: ViewComponent},
+    { path: 'edit/:id', component: CreateComponent}
 
 ];
 

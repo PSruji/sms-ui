@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../service/student.service';
 import { StudentRequest } from '../model/student.model';
 import { first } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -10,10 +11,13 @@ import { first } from 'rxjs';
   styleUrl: './create.component.css'
 })
 export class CreateComponent implements OnInit {
+  id!: string;
   form!: FormGroup;
-  isLoading=false;
+  isLoading = false;
+  isAddMode = true;
+  title = "Create";
 
-  constructor(private fb:FormBuilder, private studentService:StudentService){
+  constructor(private fb:FormBuilder, private studentService:StudentService, private route: ActivatedRoute, private router : Router){
 
   }
   ngOnInit(): void {
@@ -30,6 +34,25 @@ export class CreateComponent implements OnInit {
 
       }
      );
+     this.id = this.route.snapshot.params['id'];
+     this.isAddMode = !this.id;
+
+     if(!this.isAddMode){
+      this.title="Update";
+      this.studentService.getById(this.id).pipe(first()).subscribe(res => {
+        console.log(res);
+        this.form.controls['fname'].setValue(res.fname);
+        this.form.controls['mname'].setValue(res.mname);
+        this.form.controls['lname'].setValue(res.lname);
+        this.form.controls['email'].setValue(res.email);
+        this.form.controls['phone'].setValue(res.phone);
+        this.form.controls['dobStr'].setValue(res.dob+ "T12:00:00Z");
+        this.form.controls['dojStr'].setValue(res.doj+ "T12:00:00Z");
+        this.form.controls['grade'].setValue(res.grade+"");
+        
+      });
+    }
+    
   }
 
   onSubmit(): void{
@@ -70,6 +93,8 @@ export class CreateComponent implements OnInit {
       return `${year}-${monthStr}-${dayStr}`
     }
 
- 
+    home(){
+      this.router.navigate(['/home']);
+    }
 
 }

@@ -15,6 +15,7 @@ import { AboutComponent } from './about/about.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewComponent } from './view/view.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ViewComponent } from './view/view.component';
     HomeComponent,
     CreateComponent,
     AboutComponent,
-    ViewComponent
+    ViewComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,

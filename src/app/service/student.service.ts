@@ -24,12 +24,24 @@ export class StudentService {
   }
 
   public create(std: StudentRequest): Observable<Student>{
-    const url='${this.BASE_URL}/students'
+    const url=`${this.BASE_URL}/students`;
   
     return this.http.post<Student>(url,std)
   }
 
-  public getById(id:String): Observable<Student> {
+  public update(id:number, std: StudentRequest): Observable<Student>{
+    const url=`${this.BASE_URL}/students/${id}`;
+  
+    return this.http.put<Student>(url,std)
+  }
+
+  public deleteStudent(id:number ): Observable<any>{
+    const url=`${this.BASE_URL}/students/${id}`;
+  
+     return this.http.delete(url);
+  }
+
+  public getById(id:number): Observable<Student> {
     const url = `${this.BASE_URL}/students/${id}`;
     return this.http.get<Student>(url);
   }

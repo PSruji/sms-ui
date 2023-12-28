@@ -10,7 +10,7 @@ import { first } from 'rxjs';
   styleUrl: './view.component.css'
 })
 export class ViewComponent implements OnInit {
-  id!: string;
+  id!: number;
 
   std!: Student;
 

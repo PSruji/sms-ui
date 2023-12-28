@@ -1,34 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../service/student.service';
-import { StudentRequest } from '../model/student.model';
+import { Student, StudentRequest } from '../model/student.model';
 import { first } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
-export class CreateComponent implements OnInit {
-  id!: string;
+export class CreateComponent implements OnInit{
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  id!: number;
   form!: FormGroup;
   isLoading = false;
   isAddMode = true;
   title = "Create";
 
-  constructor(private fb:FormBuilder, private studentService:StudentService, private route: ActivatedRoute, private router : Router){
+  constructor(private fb:FormBuilder, private studentService:StudentService, private route: ActivatedRoute, private router : Router, private _snackBar: MatSnackBar){
 
   }
   ngOnInit(): void {
     this.form = this.fb.group(
       {
-        fname:  ['',Validators.required],
-        mname:  [''],
-        lname:  ['',Validators.required],
-        email:  ['',[Validators.required, Validators.email]],
-        phone:  [''],
-        dojStr: ['',Validators.required],
+        fname:  ['',[Validators.required, Validators.minLength, Validators.maxLength]],
+        mname:  ['', Validators.maxLength],
+        lname:  ['',[Validators.required, Validators.minLength, Validators.maxLength]],
+        email:  ['',[Validators.required, Validators.email, Validators.maxLength ]],
+        phone:  ['', Validators.maxLength],
+        dojStr: ['',[Validators.required,Validators.min]],
         dobStr: ['',Validators.required],
         grade:  ['',Validators.required],
 
@@ -55,6 +62,33 @@ export class CreateComponent implements OnInit {
     
   }
 
+  createStudent( req: StudentRequest) : void{
+   
+   
+    console.log(req)
+    this.studentService.create(req).pipe(first()).subscribe({
+      next:(res : Student)=>{
+        this.isLoading=false
+        this.openSnackBar(`Student Created Successfullywith ID# ${res.id}`);
+        this.view(res.id);
+      },
+      error:(err:any)=>{ console.log(err); this.isLoading=false}
+    })
+
+  }
+
+  updateStudent( req: StudentRequest): void{
+
+    this.studentService.update(this.id, req).pipe(first()).subscribe({
+      next:(res: Student)=>{
+        this.isLoading=false
+       this.openSnackBar(`Student Updated Successfullywith ID# ${res.id}`);
+        this.view(res.id);
+      },
+      error:(err:any)=>{ console.log(err); this.isLoading=false}
+    })
+  }
+
   onSubmit(): void{
     this.isLoading=true
     const req:StudentRequest={
@@ -68,13 +102,13 @@ export class CreateComponent implements OnInit {
       dojStr: this.formatDate(this.form.controls['dojStr'].value),
       grade: this.form.controls['grade'].value,
     }
-    console.log(req)
-    this.studentService.create(req).pipe(first()).subscribe({
-      next:()=>{
-        this.isLoading=false
-      },
-      error:(err:any)=>{ console.log(err); this.isLoading=false}
-    })
+    if(this.isAddMode){
+      this.createStudent(req);
+    }else{
+      req.id = this.id;
+      this.updateStudent(req);
+    }
+      
   }
 
   formatDate(date: any): string{
@@ -95,6 +129,17 @@ export class CreateComponent implements OnInit {
 
     home(){
       this.router.navigate(['/home']);
+
     }
 
+    view(id: number){
+      this.router.navigate([`/view/${id}`]);
+    }
+
+    openSnackBar(message: string) {
+      this._snackBar.open(message, 'Ok', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    }
 }

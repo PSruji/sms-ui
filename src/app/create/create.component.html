@@ -1,27 +1,34 @@
 <section fxLayout="column" fxFlexAlign="stretch">
     <div fxFlexAlign="center">
-        <p>{{title}} Student</p>
+        <p>{{title}} Student <span *ngIf="!isAddMode"> with ID#{{id}}
+        </span></p>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div fxLayout="row" fxLayoutGap="15px">
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>First Name</mat-label>
-                <input matInput placeholder="First Name" formControlName="fname" required>
+                <input matInput placeholder="First Name" formControlName="fname" [maxlength]="25" [minlength]="3" required>
                 <mat-icon matSuffix>person</mat-icon>
-                <mat-error>First name is required</mat-error>
+                
+                <mat-error *ngIf="form.get('fname')?.hasError('required')">First name is required</mat-error>
+                <mat-error *ngIf="form.get('fname')?.hasError('minlength')">First name minimum length 3 is required</mat-error>
+                <mat-error *ngIf="form.get('fname')?.hasError('maxlength')">First name maximum length 25 is required</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Middle Name</mat-label>
-                <input matInput placeholder="Middle Name" formControlName="mname">
+                <input matInput placeholder="Middle Name" formControlName="mname" maxlength="25">
                 <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="form.get('mname')?.hasError('maxlength')">Middle name maximum length is 25</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Last Name" formControlName="lname" required>
+                <input matInput placeholder="Last Name" formControlName="lname" maxlength="25" minlength="5"required>
                 <mat-icon matSuffix>person</mat-icon>
-                <mat-error>Last name is required</mat-error>
+                <mat-error *ngIf="form.get('lname')?.hasError('required')">Last name is required</mat-error>
+                <mat-error *ngIf="form.get('lname')?.hasError('minlength')">Last name minimum length 5 is required</mat-error>
+                <mat-error *ngIf="form.get('lname')?.hasError('maxlength')">Last name maximum length 25 is required</mat-error>
             </mat-form-field>
 
         </div>
@@ -29,14 +36,18 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" formControlName="email" required>
+                <input matInput placeholder="Email" formControlName="email" maxlength="50" required>
                 <mat-icon matSuffix>email</mat-icon>
-                <mat-error>Valid Email is required</mat-error>
+                
+                <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="form.get('email')?.hasError('maxlength')">Email maximum length is 50</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Phone</mat-label>
-                <input matInput placeholder="Phone Number" formControlName="phone">
+                <input matInput placeholder="Phone Number" formControlName="phone" maxlength="15" >
                 <mat-icon matSuffix>phone</mat-icon>
+                <mat-error *ngIf="form.get('phone')?.hasError('maxlength')">Phone maximum length 15</mat-error>
+
             </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutGap="15px">
@@ -50,10 +61,12 @@
 
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Date of Joining</mat-label>
-                <input matInput [matDatepicker]="dojStr" placeholder="Date of Joining" formControlName="dojStr" required>
+                <input matInput [matDatepicker]="dojStr" placeholder="Date of Joining" formControlName="dojStr" [min]="form.get('dobStr')?.value" required>
                 <mat-datepicker-toggle matSuffix [for]="dojStr"></mat-datepicker-toggle>
                 <mat-datepicker #dojStr></mat-datepicker>
-                <mat-error>Date Of Joining is required</mat-error>
+                <mat-error>Valid Date Of Joining is required</mat-error>
+                <mat-error *ngIf="form.get('dojStr')?.hasError('min')">Date Of Joining should be greater than or equal to Date of Birth</mat-error>
+
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label>Grade</mat-label>

@@ -1,0 +1,16 @@
+
+<section fxLayout="column" fxFlexAlign="stretch" style="margin:2%;">
+    <h1 mat-dialog-title style="color: red;">Delete Student</h1>
+    <div mat-dialog-content>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <p>Do you really want to delete Student with ID# <b>{{data}}</b>?</p>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+            <button color="warn" mat-raised-button (click)="cancel()">No, Cancel</button>
+            <button color="primary" mat-raised-button (click)="confirm()">Yes, Delete</button>
+        </div>
+    </div>
+
+</section>
